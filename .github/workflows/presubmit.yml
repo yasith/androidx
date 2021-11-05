@@ -1,6 +1,9 @@
 name: AndroidX Presubmits
 on:
   push:
+    branches:
+      - androidx-main
+      - develop
   pull_request:
 
 jobs:
