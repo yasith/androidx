@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import androidx.build.LibraryGroups
+import androidx.build.Publish
+
 apply plugin: 'AndroidXPlugin'
 apply plugin: 'com.android.library'
 
@@ -65,4 +68,12 @@ afterEvaluate {
     tasks.named("reportLibraryMetrics").configure {
         it.dependsOn("prefabReleaseConfigurePackage")
     }
+}
+
+androidx {
+    name = "libyuv"
+    publish = Publish.SNAPSHOT_ONLY
+    mavenGroup = LibraryGroups.LIBYUV
+    inceptionYear = "2021"
+    description = "libyuv"
 }

@@ -881,7 +881,7 @@ fun Project.validateProjectStructure(groupId: String) {
     // Fully-qualified Gradle project name should match the Maven coordinate.
     val expectName = ":${shortGroupId.replace(".",":")}:${project.name}"
     val actualName = project.path
-    if (expectName != actualName) {
+    if (expectName != actualName && !actualName.startsWith(":external")) {
         throw GradleException(
             "Invalid project structure! Expected $expectName as project name, found $actualName"
         )
@@ -891,7 +891,7 @@ fun Project.validateProjectStructure(groupId: String) {
     val expectDir = shortGroupId.replace(".", File.separator) +
         "${File.separator}${project.name}"
     val actualDir = project.projectDir.toRelativeString(project.getSupportRootFolder())
-    if (expectDir != actualDir) {
+    if (expectDir != actualDir && !actualDir.startsWith("external")) {
         throw GradleException(
             "Invalid project structure! Expected $expectDir as project directory, found $actualDir"
         )
