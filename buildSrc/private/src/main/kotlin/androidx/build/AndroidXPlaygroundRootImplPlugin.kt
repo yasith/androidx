@@ -188,6 +188,10 @@ class AndroidXPlaygroundRootImplPlugin : Plugin<Project> {
     private class PlaygroundRepositories(
         props: PlaygroundProperties
     ) {
+        val local = PlaygroundRepository(
+            "file:///usr/local/google/home/dustinlam/google/androidx-main/out/androidx/build/support_repo",
+            includeGroupRegex = """androidx\..*"""
+        )
         val snapshots = PlaygroundRepository(
             "https://androidx.dev/snapshots/builds/${props.snapshotBuildId}/artifacts/repository",
             includeGroupRegex = """androidx\..*"""
@@ -205,7 +209,7 @@ class AndroidXPlaygroundRootImplPlugin : Plugin<Project> {
             "https://androidx.dev/storage/prebuilts/androidx/internal/repository",
             includeGroupRegex = """androidx\..*"""
         )
-        val all = listOf(snapshots, metalava, doclava, prebuilts)
+        val all = listOf(local, snapshots, metalava, doclava, prebuilts)
     }
 
     private data class PlaygroundRepository(
